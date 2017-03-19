@@ -77,7 +77,14 @@ export default class WeatherReactRouter extends Component {
                   <View
                     style={styles.swipeableViewsContainer}
                     onLayout={event => {
-                      const { nativeEvent: { layout: { height: tabContentHeight } } } = event
+                      const {
+                        nativeEvent: {
+                          layout: {
+                            height: tabContentHeight
+                          }
+                        }
+                      } = event
+
                       this.setState((state, props) => ({ tabContentHeight }))
                     }}>
                     <SwipeableView
@@ -118,14 +125,15 @@ export default class WeatherReactRouter extends Component {
             <Route exact path="/day/:index" render={({ match, history }) => {
               const { index } = match.params
               const { goBack } = history
-              const weatherData = weatherData.list[index]
+              const day = weatherData.list[index]
 
               return (
                 <View style={styles.dayDetailContainer}>
+                  <StatusBar barStyle='light-content' />
                   <Header
-                    text={index === 0 ? 'Today' : format(parse(weatherData.dt), '')}
+                    text={format(parse(day.dt * 1000), 'MMMM Do')}
                     onBack={goBack} />
-                  <DayView weatherData={weatherData} />
+                  <DayView weatherData={day} />
                 </View>
               )
             }} />
@@ -146,6 +154,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#E91E63',
   },
   forecastContainer: {
+    flex: 2
+  },
+  dayDetailContainer: {
     flex: 2
   },
   swipeableViewsContainer: {

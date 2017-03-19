@@ -8,18 +8,20 @@ import {
   Image
 } from 'react-native'
 
-import backButton from '../assets/back-button.png'
+import Icon from './icon'
 
 export default ({ text, onBack }) => (
   <View style={styles.container}>
     {
       onBack
         ? (
-            <View style={styles.backButton}>
-              <TouchableOpacity onPress={onBack}>
-                <Image style={styles.image} source={backButton} />
-              </TouchableOpacity>
-            </View>
+          <View style={styles.backButtonContainer}>
+            <TouchableOpacity onPress={onBack}>
+              <View style={styles.backButton}>
+                <Icon name='back' size={30} />
+              </View>
+            </TouchableOpacity>
+          </View>
           )
         : null
     }
@@ -37,14 +39,13 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     flex: 0
   },
-  backButton: {
+  backButtonContainer: {
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
-    bottom: 9,
-    left: 8
-  },
-  image: {
-    width: 20,
-    height: 20
+    bottom: 0,
+    left: 10
   },
   title: {
     color: '#ffffff',

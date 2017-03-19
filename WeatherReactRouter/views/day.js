@@ -7,10 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 
-import Temperature from '../components/temperature'
-import Humidity from '../components/humidity'
-import WeatherConditionIcon from '../components/weather-condition-icon'
-import WindSpeed from '../components/wind-speed'
+import Icon from '../components/icon'
 
 export default ({ style, weatherData }) => {
   const {
@@ -18,18 +15,23 @@ export default ({ style, weatherData }) => {
       day: temp
     },
     weather: [{ main }],
-    humidity,
     speed
   } = weatherData
 
   return (
     <View style={[style, styles.container]}>
       <View style={styles.overviewContainer}>
-        <Temperature temp={temp} />
+        <View style={styles.temperatureContainer}>
+          <Text style={styles.temperatureText}>{Math.ceil(temp)}</Text>
+          <Text style={[styles.temperatureText, styles.degrees]}>˚</Text>
+        </View>
       </View>
       <View style={styles.otherInfoContainer}>
-        <WeatherConditionIcon type={main.toLowerCase()} />
-        <WindSpeed speed={speed} />
+        <Icon style={styles.unit} name={main.toLowerCase()} size={100} />
+        <View style={styles.windSpeedContainer}>
+          <Text style={styles.speed}>{Math.ceil(speed)}</Text>
+          <Icon name='wind' size={60} />
+        </View>
       </View>
     </View>
   )
@@ -55,5 +57,33 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingLeft: 40,
     paddingRight: 40
+  },
+  windSpeedContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  speed: {
+    color: '#ffffff',
+    fontSize: 72,
+    marginRight: 5,
+    fontWeight: '300'
+  },
+  temperatureContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  temperatureText: {
+    color: '#ffffff',
+    fontSize: 148,
+    fontWeight: '300',
+    marginBottom: 0
+  },
+  degrees: {
+    backgroundColor: 'transparent',
+    fontSize: 100,
+    marginTop: -20,
+    marginLeft: -10
   }
 })
