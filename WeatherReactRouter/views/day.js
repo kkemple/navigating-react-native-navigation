@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -6,41 +6,87 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
+import { VictoryArea } from 'victory-native'
 
 import Icon from '../components/icon'
 
-export default ({ style, weatherData }) => {
-  const {
-    temp: {
-      day: temp
-    },
-    weather: [{ main }],
-    speed
-  } = weatherData
+export default class DayView extends Component {
+  state = {
+    chartWidth: 0,
+    chartHeight: 0
+  }
 
-  return (
-    <View style={[style, styles.container]}>
-      <View style={styles.overviewContainer}>
-        <View style={styles.temperatureContainer}>
-          <Text style={styles.temperatureText}>{Math.ceil(temp)}</Text>
-          <Text style={[styles.temperatureText, styles.degrees]}>˚</Text>
+  render () {
+    const { style, weatherData } = this.props
+    const { chartWidth, chartHeight } = this.state
+
+    const {
+      temp: {
+        morn: morningTemp,
+        day: peakTemp,
+        eve: eveningTemp,
+        night: nightTemp
+      },
+      weather: [{ main }],
+      speed
+    } = weatherData
+
+    const chartData = [
+      { temp: Math.ceil(morningTemp) },
+      { temp: Math.ceil(peakTemp) },
+      { temp: Math.ceil(eveningTemp) },
+      { temp: Math.ceil(nightTemp) },
+    ]
+
+    return (
+      <View style={[style, styles.container]}>
+        <View style={styles.overviewContainer}>
+          <View style={styles.temperatureContainer}>
+            <Text style={styles.temperatureText}>{Math.ceil(peakTemp)}</Text>
+            <Text style={[styles.temperatureText, styles.degrees]}>˚</Text>
+          </View>
+        </View>
+        <View style={styles.otherInfoContainer}>
+          <Icon style={styles.unit} name={main.toLowerCase()} size={100} />
+          <View style={styles.windSpeedContainer}>
+            <Text style={styles.speed}>{Math.ceil(speed)}</Text>
+            <Icon name='wind' size={60} />
+          </View>
+        </View>
+        <View style={styles.graphContainer}>
+          <View style={styles.yAxisContainer}>
+            <Text style={styles.chartLabel}>{Math.max(...chartData.map(d => d.temp))}˚</Text>
+            <Text style={styles.chartLabel}>0˚</Text>
+          </View>
+          <View
+            style={styles.xAxisContainer}
+            onLayout={event => {
+              const { nativeEvent: { layout: { width, height } } } = event
+              this.setState({
+                chartHeight: height,
+                chartWidth: width
+              })
+            }}>
+            <VictoryArea
+              padding={0}
+              domainPadding={5}
+              width={chartWidth}
+              height={chartHeight}
+              y='temp'
+              interpolation='cardinal'
+              style={{ data: { fill: '#ffffff', opacity: 0.7 } }}
+              data={chartData} />
+          </View>
         </View>
       </View>
-      <View style={styles.otherInfoContainer}>
-        <Icon style={styles.unit} name={main.toLowerCase()} size={100} />
-        <View style={styles.windSpeedContainer}>
-          <Text style={styles.speed}>{Math.ceil(speed)}</Text>
-          <Icon name='wind' size={60} />
-        </View>
-      </View>
-    </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'stretch'
   },
   overviewContainer: {
@@ -48,8 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     paddingLeft: 40,
-    paddingRight: 40,
-    marginBottom: 40
+    paddingRight: 40
   },
   otherInfoContainer: {
     flexDirection: 'row',
@@ -85,5 +130,28 @@ const styles = StyleSheet.create({
     fontSize: 100,
     marginTop: -20,
     marginLeft: -10
+  },
+  graphContainer: {
+    marginTop: 30,
+    paddingLeft: 15,
+    paddingRight: 15,
+    height: 100,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'stretch'
+  },
+  yAxisContainer: {
+    width: 50,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  xAxisContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  chartLabel: {
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 24
   }
 })

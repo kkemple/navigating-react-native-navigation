@@ -15,7 +15,8 @@
 		"react-native-icons": "^0.7.1",
 		"react-native-svg": "^5.1.5",
 		"react-router-native": "^4.0.0",
-		"react-swipeable-views-native": "^0.11.1"
+		"react-swipeable-views-native": "^0.11.1",
+		"victory-native": "^0.7.0"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",
