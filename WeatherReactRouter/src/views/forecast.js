@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  Platform,
   View,
   TouchableOpacity,
   Text,
@@ -64,7 +65,7 @@ export default class ForecastView extends Component {
                     </View>
                   </View>
                   {
-                    expanded
+                    expanded && Platform.OS === 'ios'
                       ? (
                           <View style={styles.graphContainer}>
                             <View style={styles.yAxisContainer}>

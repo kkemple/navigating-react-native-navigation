@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  Platform,
   View,
   TouchableOpacity,
   Text,
@@ -53,31 +54,37 @@ export default class DayView extends Component {
             <Icon name='wind' size={60} />
           </View>
         </View>
-        <View style={styles.graphContainer}>
-          <View style={styles.yAxisContainer}>
-            <Text style={styles.chartLabel}>{Math.max(...chartData.map(d => d.temp))}˚</Text>
-            <Text style={styles.chartLabel}>0˚</Text>
-          </View>
-          <View
-            style={styles.xAxisContainer}
-            onLayout={event => {
-              const { nativeEvent: { layout: { width, height } } } = event
-              this.setState({
-                chartHeight: height,
-                chartWidth: width
-              })
-            }}>
-            <VictoryArea
-              padding={0}
-              domainPadding={5}
-              width={chartWidth}
-              height={chartHeight}
-              y='temp'
-              interpolation='cardinal'
-              style={{ data: { fill: '#ffffff', opacity: 0.7 } }}
-              data={chartData} />
-          </View>
-        </View>
+        {
+          Platform.OS === 'ios'
+            ? (
+                <View style={styles.graphContainer}>
+                  <View style={styles.yAxisContainer}>
+                    <Text style={styles.chartLabel}>{Math.max(...chartData.map(d => d.temp))}˚</Text>
+                    <Text style={styles.chartLabel}>0˚</Text>
+                  </View>
+                  <View
+                    style={styles.xAxisContainer}
+                    onLayout={event => {
+                      const { nativeEvent: { layout: { width, height } } } = event
+                      this.setState({
+                        chartHeight: height,
+                        chartWidth: width
+                      })
+                    }}>
+                    <VictoryArea
+                      padding={0}
+                      domainPadding={5}
+                      width={chartWidth}
+                      height={chartHeight}
+                      y='temp'
+                      interpolation='cardinal'
+                      style={{ data: { fill: '#ffffff', opacity: 0.7 } }}
+                      data={chartData} />
+                  </View>
+                </View>
+              )
+            : null
+        }
       </View>
     )
   }

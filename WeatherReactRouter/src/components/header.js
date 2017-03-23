@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-native'
 import {
+  Platform,
   View,
   Text,
   StyleSheet,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 60,
     backgroundColor: '#D81B60',
-    paddingTop: 30,
+    paddingTop: Platform.OS === 'ios' ? 30 : 10,
     paddingBottom: 10,
     flex: 0
   },
