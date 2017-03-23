@@ -1,34 +1,30 @@
-import React from 'react'
-import { withRouter } from 'react-router-native'
+import React from 'react';
+import { withRouter } from 'react-router-native';
 import {
   Platform,
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image
-} from 'react-native'
+  Image,
+} from 'react-native';
 
-import Icon from './icon'
+import Icon from './icon';
 
 export default ({ text, onBack }) => (
   <View style={styles.container}>
-    {
-      onBack
-        ? (
-          <View style={styles.backButtonContainer}>
-            <TouchableOpacity onPress={onBack}>
-              <View style={styles.backButton}>
-                <Icon name='back' size={30} />
-              </View>
-            </TouchableOpacity>
-          </View>
-          )
-        : null
-    }
+    {onBack
+      ? <View style={styles.backButtonContainer}>
+          <TouchableOpacity onPress={onBack}>
+            <View style={styles.backButton}>
+              <Icon name="back" size={30} />
+            </View>
+          </TouchableOpacity>
+        </View>
+      : null}
     <Text style={styles.title}>{text}</Text>
   </View>
-)
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D81B60',
     paddingTop: Platform.OS === 'ios' ? 30 : 10,
     paddingBottom: 10,
-    flex: 0
+    flex: 0,
   },
   backButtonContainer: {
     flex: 0,
@@ -46,12 +42,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
-    left: 10
+    left: 10,
   },
   title: {
     color: '#ffffff',
     textAlign: 'center',
     fontSize: 21,
-    fontWeight: '300'
-  }
-})
+    fontWeight: '300',
+  },
+});
