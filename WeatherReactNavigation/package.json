@@ -4,17 +4,25 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"test": "jest",
+		"postinstall": "rndebugger-open"
 	},
 	"dependencies": {
+		"date-fns": "^1.28.1",
+		"lodash": "^4.17.4",
 		"react": "15.4.2",
-		"react-native": "^0.41.2"
+		"react-native": "^0.42.3",
+		"react-native-svg": "^5.1.6",
+		"react-navigation": "^1.0.0-beta.7",
+		"react-swipeable-views-native": "^0.11.1",
+		"victory-native": "^0.7.0"
 	},
 	"devDependencies": {
-		"babel-jest": "18.0.0",
+		"babel-jest": "19.0.0",
 		"babel-preset-react-native": "1.9.1",
-		"jest": "18.1.0",
-		"react-test-renderer": "15.4.2"
+		"jest": "19.0.2",
+		"react-test-renderer": "15.4.2",
+		"react-native-debugger-open": "^0.3.2"
 	},
 	"jest": {
 		"preset": "react-native"

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
-import Navigation, {
-  Spacer,
-  Config as NavigationConfig,
-} from 'native-navigation';
 import SwipeableView from 'react-swipeable-views-native';
 import { keyBy } from 'lodash';
 
 import DayView from '../views/day';
 import ForecastView from '../views/forecast';
+import Header from '../components/header';
 import NavigationBar from '../components/navigation-bar';
 import Icon from '../components/icon';
 import weatherData from '../__fixtures__/amsterdam-7day-forecast.json';
@@ -23,6 +20,16 @@ const forecastTypeToRouteMap = keyBy(forecastRoutes, 'type');
 const indexToRouteMap = keyBy(forecastRoutes, 'index');
 
 export default class ForecastRoute extends Component {
+  static navigationOptions = {
+    title: 'Forecast',
+    header: {
+      tintColor: '#ffffff',
+      style: {
+        backgroundColor: '#00897B',
+      },
+    },
+  };
+
   state = {
     tabContentHeight: 0,
     activeIndex: 0,
@@ -38,6 +45,7 @@ export default class ForecastRoute extends Component {
   }
 
   render() {
+    const { navigation: { navigate } } = this.props;
     const { activeIndex, tabContentHeight } = this.state;
 
     const { index, title } = forecastRoutes[activeIndex];
@@ -45,13 +53,7 @@ export default class ForecastRoute extends Component {
 
     return (
       <View style={styles.forecastContainer}>
-        <NavigationConfig
-          title={title}
-          titleColor="#ffffff"
-          screenColor="#03A9F4"
-          backgroundColor="#039BE5"
-        />
-        <Spacer />
+        <StatusBar barStyle="light-content" />
         <View
           style={styles.swipeableViewsContainer}
           onLayout={event => {
@@ -79,12 +81,12 @@ export default class ForecastRoute extends Component {
               expanded
               style={{ height: tabContentHeight }}
               weatherData={weatherData.list.slice(0, 3)}
-              onDaySelected={index => Navigation.push('Day', { index: index })}
+              onDaySelected={index => navigate('Day', { index: index })}
             />
             <ForecastView
               style={{ height: tabContentHeight }}
               weatherData={weatherData.list.slice()}
-              onDaySelected={index => Navigation.push('Day', { index: index })}
+              onDaySelected={index => navigate('Day', { index: index })}
             />
           </SwipeableView>
         </View>
@@ -92,8 +94,8 @@ export default class ForecastRoute extends Component {
         {/* navigation */}
         <NavigationBar
           activeIndex={index}
-          activeColor="#03A9F4"
-          inactiveColor="#039BE5"
+          activeColor="#009688"
+          inactiveColor="#00897B"
           buttons={buttons}
           onChangeIndex={activeIndex =>
             this.setState(state => ({ ...state, activeIndex }))}
@@ -105,7 +107,7 @@ export default class ForecastRoute extends Component {
 
 const styles = StyleSheet.create({
   forecastContainer: {
-    backgroundColor: '#03A9F4',
+    backgroundColor: '#009688',
     flex: 2,
   },
   swipeableViewsContainer: {

@@ -8,7 +8,6 @@ import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 
 import DayView from '../views/day';
-import Header from '../components/header';
 import weatherData from '../__fixtures__/amsterdam-7day-forecast.json';
 
 export default class ForecastRoute extends Component {
