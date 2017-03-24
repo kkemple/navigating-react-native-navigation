@@ -8,8 +8,10 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <React/RCTBridge.h>
+@import NativeNavigation;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, RCTBridgeDelegate, ReactNavigationCoordinatorDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 

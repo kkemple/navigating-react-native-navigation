@@ -4,15 +4,15 @@
  * @flow
  */
 
-import React, { Component } from 'react'
-import { AppRegistry } from 'react-native'
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
 
-import App from './src/app'
+import App from './src/app';
 
 export default class WeatherReactRouter extends Component {
   render() {
-    return <App />
+    return <App />;
   }
 }
 
-AppRegistry.registerComponent('WeatherReactRouter', () => WeatherReactRouter)
+AppRegistry.registerComponent('WeatherReactRouter', () => WeatherReactRouter);

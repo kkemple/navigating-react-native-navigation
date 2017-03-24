@@ -1,0 +1,9 @@
+{
+  "extends": ["prettier"],
+  "parser": "babel-eslint",
+  "plugins": ["prettier"],
+  "env": {
+    "node": true,
+    "jest": true
+  }
+}

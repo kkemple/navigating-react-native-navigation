@@ -1,0 +1,56 @@
+PODS:
+  - native-navigation (0.1.0):
+    - React
+  - React (0.42.0-rc.3):
+    - React/Core (= 0.42.0-rc.3)
+  - React/Core (0.42.0-rc.3):
+    - React/cxxreact
+    - Yoga (= 0.42.0-rc.3.React)
+  - React/cxxreact (0.42.0-rc.3):
+    - React/jschelpers
+  - React/jschelpers (0.42.0-rc.3)
+  - React/RCTAnimation (0.42.0-rc.3):
+    - React/Core
+  - React/RCTImage (0.42.0-rc.3):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTNetwork (0.42.0-rc.3):
+    - React/Core
+  - React/RCTText (0.42.0-rc.3):
+    - React/Core
+  - React/RCTWebSocket (0.42.0-rc.3):
+    - React/Core
+  - RNSVG (5.1.6):
+    - React
+  - Yoga (0.42.0-rc.3.React)
+
+DEPENDENCIES:
+  - native-navigation (from `../node_modules/native-navigation`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNSVG (from `../node_modules/react-native-svg`)
+  - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+EXTERNAL SOURCES:
+  native-navigation:
+    :path: ../node_modules/native-navigation
+  React:
+    :path: ../node_modules/react-native
+  RNSVG:
+    :path: ../node_modules/react-native-svg
+  Yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga
+
+SPEC CHECKSUMS:
+  native-navigation: 23b0ef13de8bd9aaa4dbaa115e9b7055e6844987
+  React: 595dd56966a44d51a8f720fb1751ec165181b3b0
+  RNSVG: 9b5789eba967249749371dd19766149d0acf9bcb
+  Yoga: 29d2c370c8fb8bf892d3c3a3fe6aec68ea8cc450
+
+PODFILE CHECKSUM: d46379b9015c4f4cf32652c324ee33901b445d8c
+
+COCOAPODS: 1.2.0
