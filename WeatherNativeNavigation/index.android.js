@@ -6,8 +6,8 @@
 
 import Navigation from 'native-navigation';
 
-import ForecastRoute from './routes/forecast';
-import DayRoute from './routes/day';
+import ForecastRoute from './src/routes/forecast';
+import DayRoute from './src/routes/day';
 
 Navigation.registerScreen('Forecast', () => ForecastRoute);
 Navigation.registerScreen('Day', () => DayRoute);

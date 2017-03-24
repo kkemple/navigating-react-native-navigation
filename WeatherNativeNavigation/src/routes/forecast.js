@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
-import Navigation from 'native-navigation';
+import Navigation, {
+  Spacer,
+  Config as NavigationConfig,
+} from 'native-navigation';
 import SwipeableView from 'react-swipeable-views-native';
 import { keyBy } from 'lodash';
 
@@ -36,20 +39,20 @@ export default class ForecastRoute extends Component {
   }
 
   render() {
-    const { nativeNavigationInitialBarHeight: headerHeight } = this.props;
     const { activeIndex, tabContentHeight } = this.state;
 
     const { index, title } = forecastRoutes[activeIndex];
     const buttons = ['Today', '3 Day', '7 Day'];
 
     return (
-      <View style={[styles.forecastContainer, { marginTop: headerHeight }]}>
-        <Navigation.Config
+      <View style={styles.forecastContainer}>
+        <NavigationConfig
           title={title}
           titleColor="#ffffff"
           screenColor="#03A9F4"
           backgroundColor="#039BE5"
         />
+        <Spacer />
         <View
           style={styles.swipeableViewsContainer}
           onLayout={event => {
