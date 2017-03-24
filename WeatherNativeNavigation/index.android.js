@@ -10,5 +10,4 @@ import ForecastRoute from './routes/forecast';
 import DayRoute from './routes/day';
 
 Navigation.registerScreen('Forecast', () => ForecastRoute);
-
 Navigation.registerScreen('Day', () => DayRoute);
