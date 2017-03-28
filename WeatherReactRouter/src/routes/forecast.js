@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  AndroidBack,
+  BackAndroid,
   Platform,
   StatusBar,
   StyleSheet,
@@ -33,18 +33,18 @@ export default class ForecastRoute extends Component {
   constructor() {
     super(...arguments);
 
-    this.onAndroidBack = this.onAndroidBack.bind(this);
+    this.onBackAndroid = this.onBackAndroid.bind(this);
   }
 
   componentWillMount() {
     if (Platform.OS === 'android') {
-      AndroidBack.addEventListener('hardwareBackPress', this.onAndroidBack);
+      BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
     }
   }
 
   componentWillUnmount() {
     if (Platform.OS === 'android') {
-      AndroidBack.removeEventListener('hardwareBackPress', this.onAndroidBack);
+      BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
     }
   }
 
